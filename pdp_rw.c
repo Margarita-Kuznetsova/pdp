@@ -14,14 +14,18 @@ byte mem[(64-8)*1024];
 
 int main()
 {
-    word w;
+	byte b;
+	word w;
+	
 
-
-    w = w_read(2);
-    printf("%04hx\n", w);
-
-
-    return 0;
+	b = b_read(0);
+	printf("%02hhx\n", b);
+	
+	w = w_read(2);
+	printf("%04hx\n", w);
+	
+	
+	return 0;
 }
 
 
@@ -30,4 +34,8 @@ word w_read (adr a) {
 	w = (mem[a+1] << 8) | (mem[a] & 0xFF);
 	
 	return w;
+}
+
+byte b_read (adr a) {
+	return mem[a];
 }
