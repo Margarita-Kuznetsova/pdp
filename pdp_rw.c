@@ -12,9 +12,15 @@ void w_write (adr a, word val);   // пишет значение val в "ста�
 byte mem[(64-8)*1024];
 
 
+void load_file();
+
+void mem_dump(adr start, word n);
+
+
 int main()
 {
 	load_file();
+	mem_dump(0x40, 4);
 	
 	/*
 	byte b, b0, b1;
@@ -72,4 +78,9 @@ void load_file() {
 			b_write(adrs + i, el);
 		}
 	}
+}
+
+void mem_dump(adr start, word n) {
+	for (int i = 0; i < (n / 2); i++)
+		printf("%06o : %06o\n", start + 2 * i, w_read(start + 2 * i));
 }
