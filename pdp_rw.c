@@ -14,6 +14,9 @@ byte mem[(64-8)*1024];
 
 int main()
 {
+	load_file();
+	
+	/*
 	byte b, b0, b1;
 	word w, w0;
 	
@@ -35,6 +38,7 @@ int main()
 	b0 = b_read(4);
 	b = b_read(5);
 	printf("<<%02hhx>>\n<<%02hhx>>\n%04hx\n", b0, b, w);
+	*/
 	
 	return 0;
 }
@@ -58,4 +62,14 @@ void b_write (adr a, byte val) {
 void w_write (adr a, word val) {
 	mem[a] = val & 0xFF;
 	mem[a + 1] = (val >> 8);
+}
+
+void load_file() {
+	unsigned int adrs, n, i, el;
+	while (scanf("%x%x", &adrs, &n) == 2) {
+		for(i = 0; i < n; i++) {
+			scanf("%x", &el);
+			b_write(adrs + i, el);
+		}
+	}
 }
